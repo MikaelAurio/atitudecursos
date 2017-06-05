@@ -1,9 +1,16 @@
-﻿<?php
+<?php
 session_start();
 
 include("../../php/config.php");
 protegePagina();
 ?>
+<script>
+    function videolink(code) {
+        $.post('biblioteca.php', '',function(item) {
+            $('#video').src(item[1]);
+        } )
+    }
+</script>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,7 +26,7 @@ protegePagina();
 	<!-- BOOTSTRAP STYLES-->
     <link href="../../assets/css/bootstrap.css" rel="stylesheet"/>
      <!-- FONTAWESOME STYLES-->
-    <link href="../../assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="../../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
      <!-- MORRIS CHART STYLES-->
     <link href="../../assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
         <!-- CUSTOM STYLES-->
@@ -42,24 +49,7 @@ protegePagina();
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
-font-size: 16px;"> <?php echo "Ultimo acesso ". $_SESSION['data_ultimo_login'] ?> 
-<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#confirm" style="margin-left: 30px"><i class="fa fa-sign-out"> </i>Sair</button></div>
-
-<div class="modal fade" id="confirm" role="dialog">
-  <div class="modal-dialog modal-md">
-
-    <div class="modal-content">
-      <div class="modal-body">
-            <p>Você deseja realmente sair?</p>
-      </div>
-      <div class="modal-footer">
-        <a href="../../php/logout.php" type="button" class="btn btn-danger" style="margin-left: 30px" id="delete">Confirmar</a>
-            <button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
-      </div>
-    </div>
-
-  </div>
-</div>
+font-size: 16px;"> <?php echo "Ultimo acesso ". $_SESSION['data_ultimo_login'] ?> <a href="../php/logout.php" class="btn btn-danger" style="margin-left: 30px">Sair</a> </div>
         </nav>   
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
@@ -96,13 +86,98 @@ font-size: 16px;"> <?php echo "Ultimo acesso ". $_SESSION['data_ultimo_login'] ?
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2><strong>CURSO DE INFORMÁTICA</strong></h2>   
+                     <h2><strong>CURSO DE MICROSOFT WORD</strong></h2>
                         <h5><?php echo "Bem vindo <strong>". $_SESSION['nome'] ."</strong>, ao curso de Word. "?></h5>
                     </div>
                 </div>              
                  <!-- /. ROW  -->
                  <hr />
                  <div class="row">
+                     <div class="col-lg-3 col-md-6">
+                         <div class="panel panel-primary">
+                             <div class="panel-heading">
+                                 <div class="row">
+                                     <div class="col-xs-3">
+                                         <i class="fa fa-folder-open fa-5x"></i>
+                                     </div>
+                                     <div class="col-xs-9 text-right">
+                                         <div class="huge">Material</div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <a data-toggle="modal" data-target="#material" href="#">
+                                 <div class="panel-footer">
+                                     <span class="pull-left">Ver Material</span>
+                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                     <div class="clearfix"></div>
+                                 </div>
+                             </a>
+                         </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6">
+                         <div class="panel panel-green">
+                             <div class="panel-heading">
+                                 <div class="row">
+                                     <div class="col-xs-3">
+                                         <i class="fa fa-tasks fa-5x"></i>
+                                     </div>
+                                     <div class="col-xs-9 text-right">
+                                         <div class="huge">Atividades</div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <a data-toggle="modal" data-target="#atividade" href="#">
+                                 <div class="panel-footer">
+                                     <span class="pull-left">Começar a Praticar</span>
+                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                     <div class="clearfix"></div>
+                                 </div>
+                             </a>
+                         </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6">
+                         <div class="panel panel-yellow">
+                             <div class="panel-heading">
+                                 <div class="row">
+                                     <div class="col-xs-3">
+                                         <i class="fa fa-bullhorn fa-5x"></i>
+                                     </div>
+                                     <div class="col-xs-9 text-right">
+                                         <div class="huge">Avaliação</div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <a href="#">
+                                 <div class="panel-footer">
+                                     <span class="pull-left">Fazer a Prova Final</span>
+                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                     <div class="clearfix"></div>
+                                 </div>
+                             </a>
+                         </div>
+                     </div>
+                     <div class="col-lg-3 col-md-6">
+                         <div class="panel panel-red">
+                             <div class="panel-heading">
+                                 <div class="row">
+                                     <div class="col-xs-3">
+                                         <i class="fa fa-mortar-board fa-5x"></i>
+                                     </div>
+                                     <div class="col-xs-9 text-right">
+                                         <div class="huge">Certificado</div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <a href="#">
+                                 <div class="panel-footer">
+                                     <span class="pull-left">Solicitar Certificado</span>
+                                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                     <div class="clearfix"></div>
+                                 </div>
+                             </a>
+                         </div>
+                     </div>
+                     <hr />
                     
                       <div class="col-lg-12">
                     <div class="panel panel-default">
@@ -110,22 +185,22 @@ font-size: 16px;"> <?php echo "Ultimo acesso ". $_SESSION['data_ultimo_login'] ?
                          	<strong>Microsoft Word 2010</strong>
                         </div>        
                                       
-                                    <div class="panel-body"> 
+                        <div class="panel-body">
+                            <iframe id="video" width="980" width="560" height="551" height="315" src="" frameborder="0" allowfullscreen></iframe>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <p>Conhecido como o mais popular editor de textos do mercado, a versão 2010 do Microsoft Word chega para manter o programa na posição de uma das melhores opções quando o objetivo é compor trabalhos ou até mesmo fazer postagens em blogs. Embora a interface não seja tão diferente da versão 2007, diversas novidades garantem uma experiência de uso ainda mais confortável.
 
-                    <h4>Frame de video</h4>
-                    <iframe width="980" width="560" height="551" height="315" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" src="https://www.youtube.com/embed/C_z_fw1fqT4?list=PLWShyXDYqUBQ3UIX96eg5sxyoasR3Eu0Y" frameborder="0" allowfullscreen></iframe>
-                    <p>Conhecido como o mais popular editor de textos do mercado, a versão 2010 do Microsoft Word chega para manter o programa na posição de uma das melhores opções quando o objetivo é compor trabalhos ou até mesmo fazer postagens em blogs. Embora a interface não seja tão diferente da versão 2007, diversas novidades garantem uma experiência de uso ainda mais confortável.
+                            A interface permanece a Ribbon, mesma da versão anterior, porém ganhou um fundo branco em vez de azulado.
+                            Para deixar a utilização mais fácil, o sistema de abas sofreu ligeiras alterações, principalmente no que diz
+                            respeito à ordem e tamanho com que algumas funções são exibidas – caso da contagem de palavras, que agora ganha
+                            destaque na aba “Revisão”.</p>
 
-A interface permanece a Ribbon, mesma da versão anterior, porém ganhou um fundo branco em vez de azulado. Para deixar a utilização mais fácil, o sistema de abas sofreu ligeiras alterações, principalmente no que diz respeito à ordem e tamanho com que algumas funções são exibidas – caso da contagem de palavras, que agora ganha destaque na aba “Revisão”.</p>
-                   
-                    <h4>Downloand do PDF</h4>
-                    <iframe src="../../pdf/apostila-word.pdf" width="980" height="780" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">Carregando...</iframe>
-                                       
-                    <h4>Editor de texto</h4>
-                    <iframe src="https://docs.google.com/document/d/1BVYMVr16Aa5Hfl53SAhKa86ro15nMUVul__ukqY8k4M/edit?usp=sharing" width="980" width="500" height="500" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-                   
-					<h4>Perguntas e Resposta</h4>
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScc_JTY24kg-GqRfUZ2ok-1vC9qjWxrnUerGnezu-QfCdCETQ/viewform?embedded=true" width="980" width="500" height="3600" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+
+
+
                   
                    <!-- <h4>Small Button</h4>
                     <a href="#" class="btn btn-default btn-sm">default</a>
@@ -376,6 +451,35 @@ A interface permanece a Ribbon, mesma da versão anterior, porém ganhou um fund
             </div>
          <!-- /. PAGE WRAPPER  -->
         </div>
+        </div>
+
+    <div class="modal fade" id="material" role="dialog">
+        <div class="modal-dialog modal-md">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" data-dismiss="modal" class="btn btn-default pull-right"><i class="fa fa-times"></i></button>
+                    <p><a href="../../pdf/apostila-word.pdf" style="color: #000""><i class="fa fa-file-pdf-o fa-2x"></i> Aportila do Microsoft Word</a></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="atividade" role="dialog">
+        <div class="modal-dialog modal-md">
+
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" data-dismiss="modal" class="btn btn-default pull-right"><i class="fa fa-times"></i></button>
+                    <h4>Perguntas e Resposta</h4>
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScc_JTY24kg-GqRfUZ2ok-1vC9qjWxrnUerGnezu-QfCdCETQ/viewform?embedded=true" width="570" width="70" height="3600" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
      <!-- /. WRAPPER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
     <!-- JQUERY SCRIPTS -->
@@ -386,6 +490,6 @@ A interface permanece a Ribbon, mesma da versão anterior, porém ganhou um fund
     <script src="../../assets/js/jquery.metisMenu.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="../../assets/js/custom.js"></script>
- 
+
 </body>
 </html>
